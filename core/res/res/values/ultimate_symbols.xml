@@ -15,6 +15,11 @@
  * limitations under the License.
 -->
 <resources>
+    <!-- Package Manager -->
+    <java-symbol type="array" name="config_deviceDisabledComponents" />
+    <java-symbol type="array" name="config_globallyDisabledComponents" />
+    <java-symbol type="array" name="config_forceEnabledComponents" />
+    
     <!-- The list of package IDs that are allowed to skip camera high frame rate checks. -->
     <java-symbol type="array" name="config_cameraHFRPrivAppList" />
     
