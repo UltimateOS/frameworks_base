@@ -6275,6 +6275,19 @@ public final class Settings {
         };
 
         /**
+         * Swipe to screenshot
+         * @hide
+         */
+        public static final String SWIPE_TO_SCREENSHOT = "swipe_to_screenshot";
+
+        /**
+         * IMPORTANT: If you add a new public settings you also have to add it to
+         * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
+         * it to PRIVATE_SETTINGS below. Also add a validator that can validate
+         * the setting value. See an example above.
+         */
+
+        /**
          * These are all public system settings
          *
          * @hide
@@ -6402,6 +6415,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(VIBRATE_ON_CONNECT);
             PRIVATE_SETTINGS.add(VIBRATE_ON_CALLWAITING);
             PRIVATE_SETTINGS.add(VIBRATE_ON_DISCONNECT);
+            PRIVATE_SETTINGS.add(SWIPE_TO_SCREENSHOT);
         }
 
         /**
