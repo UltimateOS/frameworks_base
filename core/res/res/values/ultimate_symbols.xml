@@ -19,6 +19,10 @@
     <java-symbol type="array" name="config_deviceDisabledComponents" />
     <java-symbol type="array" name="config_globallyDisabledComponents" />
     <java-symbol type="array" name="config_forceEnabledComponents" />
+
+    <!-- Device keyhandlers -->
+    <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
+    <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
     
     <!-- The list of package IDs that are allowed to skip camera high frame rate checks. -->
     <java-symbol type="array" name="config_cameraHFRPrivAppList" />
