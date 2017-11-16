@@ -18,6 +18,9 @@
     <!-- AI Assistant affordance [CHAR LIMIT=32] -->
     <string name="accessibility_assistant_button">AI Assistant</string>
 
+    <!-- Screenshot Delete Toast -->
+    <string name="delete_screenshot_toast">Screenshot deleted</string>
+
     <!-- Text while recognizing face -->
     <string name="face_unlock_recognizing">Recognizing face...</string>
 
