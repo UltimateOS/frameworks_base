@@ -283,9 +283,7 @@ public class KeyguardStateControllerImpl implements KeyguardStateController {
 
     @Override
     public boolean isKeyguardScreenRotationAllowed() {
-        return SystemProperties.getBoolean("lockscreen.rot_override", false)
-                || mContext.getResources().getBoolean(R.bool.config_enableLockScreenRotation)
-                || mFeatureFlags.isEnabled(LOCKSCREEN_ENABLE_LANDSCAPE);
+        return false;
     }
 
     @Override
