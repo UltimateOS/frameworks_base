@@ -30,6 +30,9 @@
 
     <!-- For dynamic default font styles -->
     <java-symbol type="string" name="config_bodyFontFamily" />
+
+    <!-- Location indicator -->
+    <java-symbol type="drawable" name="stat_sys_location" />
     
     <!-- The list of package IDs that are allowed to skip camera high frame rate checks. -->
     <java-symbol type="array" name="config_cameraHFRPrivAppList" />
