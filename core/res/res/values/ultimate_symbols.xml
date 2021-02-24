@@ -50,6 +50,9 @@
     <!-- Whether to use Richtap vibration -->
     <java-symbol type="bool" name="config_usesRichtapVibration" />
 
+    <!-- Location indicator -->
+    <java-symbol type="drawable" name="stat_sys_location" />
+
     <!-- Alert Slider -->
     <java-symbol type="string" name="alert_slider_state_path" />
     <java-symbol type="string" name="alert_slider_uevent_match_path" />
