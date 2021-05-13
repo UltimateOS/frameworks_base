@@ -94,6 +94,9 @@ public class AutomaticBrightnessStrategy extends AutomaticBrightnessStrategy2
     @Nullable
     private BrightnessConfiguration mBrightnessConfiguration;
 
+    // Whether auto brightness is applied one shot when screen is turned on
+    private boolean mAutoBrightnessOneShot;
+
     // Indicates if the strategy is already configured for a request, in which case we wouldn't
     // want to re-evaluate the auto-brightness state
     private boolean mIsConfigured;
@@ -114,6 +117,7 @@ public class AutomaticBrightnessStrategy extends AutomaticBrightnessStrategy2
         mAutoBrightnessAdjustment = getAutoBrightnessAdjustmentSetting();
         mPendingAutoBrightnessAdjustment = PowerManager.BRIGHTNESS_INVALID_FLOAT;
         mTemporaryAutoBrightnessAdjustment = PowerManager.BRIGHTNESS_INVALID_FLOAT;
+        mAutoBrightnessOneShot = getAutoBrightnessOneShotSetting();
         mDisplayManagerFlags  = displayManagerFlags;
         mInjector = (injector == null) ? new RealInjector() : injector;
     }
@@ -480,7 +484,8 @@ public class AutomaticBrightnessStrategy extends AutomaticBrightnessStrategy2
                     lastUserSetScreenBrightness,
                     userSetBrightnessChanged, autoBrightnessAdjustment,
                     mAutoBrightnessAdjustmentChanged, policy, displayState,
-                    mShouldResetShortTermModel);
+                    mShouldResetShortTermModel,
+                    mAutoBrightnessOneShot);
             mShouldResetShortTermModel = false;
             // We take note if the user brightness point is still being used in the current
             // auto-brightness model.
@@ -508,6 +513,12 @@ public class AutomaticBrightnessStrategy extends AutomaticBrightnessStrategy2
         // since we have not settled to a value yet
         return mAppliedTemporaryAutoBrightnessAdjustment
                 ? mTemporaryAutoBrightnessAdjustment : mAutoBrightnessAdjustment;
+    }
+
+    private boolean getAutoBrightnessOneShotSetting() {
+        return Settings.System.getIntForUser(
+                mContext.getContentResolver(), Settings.System.AUTO_BRIGHTNESS_ONE_SHOT,
+                0, UserHandle.USER_CURRENT) == 1;
     }
 
     /**
