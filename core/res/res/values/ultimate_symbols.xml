@@ -27,6 +27,9 @@
     <!-- Define device configs on boot -->
     <java-symbol type="array" name="global_device_configs_override" />
     <java-symbol type="array" name="device_configs_override" />
+
+    <!-- For dynamic default font styles -->
+    <java-symbol type="string" name="config_bodyFontFamily" />
     
     <!-- The list of package IDs that are allowed to skip camera high frame rate checks. -->
     <java-symbol type="array" name="config_cameraHFRPrivAppList" />
