@@ -17,4 +17,7 @@
 <resources>
     <!-- The list of package IDs that are allowed to skip camera high frame rate checks. -->
     <java-symbol type="array" name="config_cameraHFRPrivAppList" />
+
+    <!-- Whether to force enable multi resolution configuration for camera -->
+    <java-symbol type="bool" name="config_forceMultiResolution" />
 </resources>
