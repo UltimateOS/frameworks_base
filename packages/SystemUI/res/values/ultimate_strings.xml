@@ -18,6 +18,9 @@
     <!-- AI Assistant affordance [CHAR LIMIT=32] -->
     <string name="accessibility_assistant_button">AI Assistant</string>
 
+    <!-- Text while recognizing face -->
+    <string name="face_unlock_recognizing">Recognizing face...</string>
+
     <!-- Advanced Reboot -->
     <string name="global_action_restart_advanced">Advanced</string>
     <string name="global_action_restart_recovery">Recovery</string>
