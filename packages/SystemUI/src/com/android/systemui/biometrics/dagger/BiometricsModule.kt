@@ -23,6 +23,8 @@ import com.android.internal.R
 import com.android.systemui.CoreStartable
 import com.android.systemui.biometrics.AuthController
 import com.android.systemui.biometrics.EllipseOverlapDetectorParams
+import com.android.systemui.biometrics.FingerprintInteractiveToAuthProvider
+import com.android.systemui.biometrics.FingerprintInteractiveToAuthProviderImpl
 import com.android.systemui.biometrics.UdfpsUtils
 import com.android.systemui.biometrics.data.repository.BiometricStatusRepository
 import com.android.systemui.biometrics.data.repository.BiometricStatusRepositoryImpl
@@ -40,11 +42,12 @@ import com.android.systemui.biometrics.udfps.BoundingBoxOverlapDetector
 import com.android.systemui.biometrics.udfps.EllipseOverlapDetector
 import com.android.systemui.biometrics.udfps.OverlapDetector
 import com.android.systemui.biometrics.ui.binder.SideFpsOverlayViewBinder
-import com.android.systemui.biometrics.FingerprintInteractiveToAuthProvider
-import com.android.systemui.biometrics.FingerprintInteractiveToAuthProviderImpl
 import com.android.systemui.dagger.SysUISingleton
+import com.android.systemui.dagger.qualifiers.Background
 import com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
+import com.android.systemui.user.domain.interactor.SelectedUserInteractor
 import com.android.systemui.util.concurrency.ThreadFactory
+import com.android.systemui.util.settings.SecureSettings
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -53,6 +56,7 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import java.util.concurrent.Executor
 import javax.inject.Qualifier
+import kotlinx.coroutines.CoroutineDispatcher
 
 /** Dagger module for all things biometric. */
 @Module
@@ -133,8 +137,18 @@ interface BiometricsModule {
         }
 
         @Provides
-        fun providesFingerprintInteractiveToAuth(ctx: Context): FingerprintInteractiveToAuthProvider =
-            FingerprintInteractiveToAuthProviderImpl(ctx);
+        fun providesFingerprintInteractiveToAuth(
+            @Background backgroundDispatcher: CoroutineDispatcher,
+            context: Context,
+            secureSettings: SecureSettings,
+            selectedUserInteractor: SelectedUserInteractor,
+        ): FingerprintInteractiveToAuthProvider =
+            FingerprintInteractiveToAuthProviderImpl(
+                backgroundDispatcher,
+                context,
+                secureSettings,
+                selectedUserInteractor,
+            )
     }
 }
 
