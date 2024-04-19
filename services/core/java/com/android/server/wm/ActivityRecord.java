@@ -4038,6 +4038,7 @@ final class ActivityRecord extends WindowToken implements WindowManagerService.A
         boolean removedFromHistory = false;
 
         cleanUp(false /* cleanServices */, false /* setState */);
+        setVisibleRequested(false);
 
         if (hasProcess()) {
             app.removeActivity(this, true /* keepAssociation */);
