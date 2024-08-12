@@ -70,9 +70,6 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
     final SubscriptionInfo mSubscriptionInfo;
     private Map<String, MobileIconGroup> mNetworkToIconLookup;
 
-    private static final String SHOW_FOURG_ICON =
-            "system:" + Settings.System.SHOW_FOURG_ICON;
-
     private MobileIconGroup mDefaultIcons;
     private Config mConfig;
     @VisibleForTesting
@@ -161,21 +158,6 @@ public class MobileSignalController extends SignalController<MobileState, Mobile
             }
         };
         mMobileStatusTracker = mobileStatusTrackerFactory.createTracker(mMobileCallback);
-
-        Dependency.get(TunerService.class).addTunable(this, SHOW_FOURG_ICON);
-    }
-
-    @Override
-    public void onTuningChanged(String key, String newValue) {
-        switch (key) {
-            case SHOW_FOURG_ICON:
-                mConfig = Config.readConfig(mContext);
-                setConfiguration(mConfig);
-                notifyListeners();
-                break;
-            default:
-                break;
-        }
     }
 
     void setConfiguration(Config config) {
