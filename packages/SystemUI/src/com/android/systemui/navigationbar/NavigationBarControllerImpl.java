@@ -233,16 +233,9 @@ public class NavigationBarControllerImpl implements
         }
     }
 
-    private boolean shouldCreateNavBarAndTaskBar(Context context, int displayId) {
+    private boolean shouldCreateNavBarAndTaskBar(int displayId) {
         if (mHasNavBar.indexOfKey(displayId) > -1) {
             return mHasNavBar.get(displayId);
-        }
-
-        if (displayId == mDisplayTracker.getDefaultDisplayId() &&
-                Settings.System.getIntForUser(context.getContentResolver(),
-                        Settings.System.NAVIGATION_BAR_SHOW, 0,
-                        UserHandle.USER_CURRENT) == 1) {
-            return true;
         }
 
         final IWindowManager wms = WindowManagerGlobal.getWindowManagerService();
@@ -270,7 +263,7 @@ public class NavigationBarControllerImpl implements
     /** @return {@code true} if taskbar is enabled, false otherwise */
     private boolean initializeTaskbarIfNecessary() {
         boolean taskbarEnabled = supportsTaskbar() && shouldCreateNavBarAndTaskBar(
-                mContext, mContext.getDisplayId());
+                mContext.getDisplayId());
 
         if (taskbarEnabled) {
             Trace.beginSection("NavigationBarController#initializeTaskbarIfNecessary");
@@ -383,11 +376,8 @@ public class NavigationBarControllerImpl implements
 
         final int displayId = display.getDisplayId();
         final boolean isOnDefaultDisplay = displayId == mDisplayTracker.getDefaultDisplayId();
-        final Context context = isOnDefaultDisplay
-                ? mContext
-                : mContext.createDisplayContext(display);
 
-        if (!shouldCreateNavBarAndTaskBar(context, displayId)) {
+        if (!shouldCreateNavBarAndTaskBar(displayId)) {
             return;
         }
 
@@ -397,6 +387,9 @@ public class NavigationBarControllerImpl implements
             return;
         }
 
+        final Context context = isOnDefaultDisplay
+                ? mContext
+                : mContext.createDisplayContext(display);
         NavigationBarComponent component = mNavigationBarComponentFactory.create(
                 context, savedState);
         NavigationBar navBar = component.getNavigationBar();
@@ -418,12 +411,6 @@ public class NavigationBarControllerImpl implements
                 v.removeOnAttachStateChangeListener(this);
             }
         });
-
-        try {
-            WindowManagerGlobal.getWindowManagerService().onOverlayChanged();
-        } catch (RemoteException e) {
-            // Do nothing.
-        }
     }
 
     @Override

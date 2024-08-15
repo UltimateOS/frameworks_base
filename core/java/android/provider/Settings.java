@@ -6423,14 +6423,6 @@ public final class Settings {
          */
 
         /**
-         * Whether to scramble a pin unlock layout
-         * 0 = 0ff, 1 = on
-         * @hide
-         */
-        public static final String LOCKSCREEN_SCRAMBLE_PIN_LAYOUT =	
-                "lockscreen_scramble_pin_layout";
-
-        /**
          * Whether to enable smart 5G mode
          * @hide
          */
